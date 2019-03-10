@@ -1,0 +1,21 @@
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        dt = dict()
+        result = []
+
+
+        for i in range(len(nums)):          
+            dt[nums[i]] = i
+            
+        for i in range(len(nums)):     # 考虑一个target由两个相同的数字组成。例如[3,3] 6
+            res =  target - nums[i]
+            if res in dt.keys() and dt.get(res) != i:
+                return [i, dt.get(res)]
+        
+        for item in nums:
+            goal = target - item
+            if dt.get(goal) is not None and dt.get(goal) not in result and dt.get(goal) != dt.get(item):
+                result.append(dt.get(item))
+                result.append(dt.get(goal))
+        
+        return result 
